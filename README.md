@@ -45,31 +45,36 @@ Comes with:
 
 1. Copy the mysql.env.example in the env folder to mysql.env and fill out the project details
 
-2. Install the vendor dependencies<br>
+2. Install the vendor dependencies
    `docker-compose run --rm composer install`
 
-3. Copy the .env.example found in <strong>src</strong> to .env and fill out the project details making sure they match the mysql.env values.
+3. Copy the .env.example found in **src** to .env and fill out the project details making sure they match the mysql.env values.
 
-4. Generate a new app key by running<br>
+4. Generate a new app key by running
    `docker-compose run --rm artisan key:generate`
 
-5. Start the server and start developing<br>
+5. Start the server and start developing
    `docker-compose run npm i`
 
-6. Start the server and start developing<br>
+6. Start the server and start developing
    `docker-compose up -d server`
 
 7. Start Broswer Sync to view live changes
     `docker-compose run --rm --service-ports npm run watch`
 
+### Other commands
 
-### Other commands:
+> You can stop the server with `docker-compose down`
+> All artisan commands with `docker-compose run --rm artisan [your input]`
+> All composer commands with `docker-compose run --rm composer [your input]`
+> All npm commands with `docker-compose run --rm npm [your input]`
 
-> You can stop the server with `docker-compose down`<br>
-> All artisan commands with `docker-compose run --rm artisan [your input]`<br>
-> All composer commands with `docker-compose run --rm composer [your input]`<br>
-> All npm commands with `docker-compose run --rm npm [your input]`<br>
+### Sidenote
 
-### Sidenote:
+If when migrating the tables is failing:
+
+1. Make sure your credentials are right in the .env file and retry
+2. Verify that in the .env file you are passing the name of the mysql container and not localhost or 127.0.0.1 and try again
+3. run `docker-compose run --rm composer require doctrine/dbal` to install a missing dependency
 
 Kubernetes not implemented yet, will be once closer to deployment

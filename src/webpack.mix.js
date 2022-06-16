@@ -31,9 +31,7 @@ mix.options({
     }).version();
 
 
-mix.ts("resources/js/app.js", "public/js").react();
-// mix.sass("resources/scss/index.scss", "public/css")
-mix.webpackConfig({
+mix.ts("resources/js/app.js", "public/js").react().webpackConfig({
     module: {
       rules: [
         {

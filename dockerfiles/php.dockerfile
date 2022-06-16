@@ -1,4 +1,4 @@
-FROM php:sha256:bdaaed87c00568472c469cb705d3abc52ea883ecb07dc4e491ae34230b4e9896
+FROM php:8.1-fpm-alpine
 
 WORKDIR /var/www/html
 

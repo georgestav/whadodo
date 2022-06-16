@@ -1,4 +1,4 @@
-FROM nginx:sha256:8d4fc999c0199edf0fcae821651ba9463075f6a1100b6a37c7b95bfdc76bdb70
+FROM nginx:stable-alpine
 
 WORKDIR /etc/nginx/conf.d
 

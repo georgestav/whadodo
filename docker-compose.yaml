@@ -27,7 +27,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db:/data/db
+      - db:/var/lib/mysql
   composer:
     build:
       context: ./dockerfiles
