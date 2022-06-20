@@ -15,3 +15,10 @@ export interface I_ErrorMessage {
     },
     status?: string | undefined
 }
+
+export interface I_SuccessMessage {
+    message?: {
+        message?: string;
+    },
+    status?: string | undefined
+}
