@@ -1,44 +1,67 @@
-import React from "react";
-import { Form, Button } from "react-bootstrap";
+import axios, { AxiosError } from "axios";
+import React, { useState } from "react";
 import '../../../scss/components/register/Register.scss';
-
-/* 
-name, email, password
-*/
+import useAPIError from "../../common/hooks/useAPIError";
+import useAPISuccess from "../../common/hooks/useAPISuccess";
+import { FormTools } from "../../utils/FormUtils";
+import RegisterComponent from "./RegisterComponent";
 
 const Register = () => {
+    const { addError } = useAPIError();
+    const { addSuccess } = useAPISuccess();
+    const [emailInput, setEmailInput] = useState('');
+    const [nameInput, setNameInput] = useState('');
+    const [passwordInput, setPasswordInput] = useState('');
+    const [passworndConfirmInput, setPassworndConfirmInput] = useState('');
+    const [terms, setTerms] = useState(false);
+
+    const handleTerms = (status: boolean) => {
+        setTerms(status);
+    }
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const formData = {
+            email: emailInput,
+            name: nameInput,
+            password: passwordInput,
+            password_confirmation: passworndConfirmInput,
+            terms_accepted: terms
+        }
+        try {
+            const validated = await FormTools.validateRegForm(formData)
+            axios.post('/register', validated).then((res) => {
+                addSuccess({ message: 'Registered Successfully ' + formData.name + ', Welcome Onboard!' })
+                setEmailInput('');
+                setNameInput('');
+                setPasswordInput('');
+                setPassworndConfirmInput('');
+                setTerms(false);
+            }).catch((onrejected) => {
+                if (onrejected instanceof AxiosError) {
+                    addError({ ...onrejected.response?.data });
+                }
+            });
+        } catch (error) {
+            if (error instanceof Error) {
+                return addError({ message: error.message });
+            }
+        }
+    }
+
+
     return (
-        <Form className="form__container">
-            <h3>Register with Whadodo</h3>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="forUserName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="A name" />
-                <Form.Text className="text-muted">
-                    Will be used for display and communication can be changed later.
-                </Form.Text>
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Label>Just like everyone, Terms &amp; Conditions</Form.Label>
-                <Form.Check type="checkbox" label="I Agree" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
-
+        <RegisterComponent
+            handleSubmit={handleSubmit}
+            emailInput={emailInput}
+            setEmailInput={setEmailInput}
+            nameInput={nameInput}
+            setNameInput={setNameInput}
+            passwordInput={passwordInput}
+            setPasswordInput={setPasswordInput}
+            passworndConfirmInput={passworndConfirmInput}
+            setPassworndConfirmInput={setPassworndConfirmInput}
+            handleTerms={handleTerms} />
     );
 };
 
