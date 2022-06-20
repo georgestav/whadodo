@@ -1,10 +1,12 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import React, { useState } from "react";
 import '../../../scss/components/register/Register.scss';
-import { DateUtils } from "../../utils/DateUtils";
+import useAPIError from "../../common/hooks/useAPIError";
+import { FormTools } from "../../utils/FormUtils";
 import RegisterComponent from "./RegisterComponent";
-
+// TODO success UI display
 const Register = () => {
+    const { addError } = useAPIError();
     const [emailInput, setEmailInput] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
@@ -17,20 +19,29 @@ const Register = () => {
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
-        if (!terms) return alert('need to accept')
         const formData = {
             email: emailInput,
             name: nameInput,
             password: passwordInput,
             password_confirmation: passworndConfirmInput,
-            terms_accepted: DateUtils.getDateNowString()
+            terms_accepted: terms
         }
         try {
-            axios.post('/register', formData);
+            const validated = await FormTools.validateRegForm(formData)
+            axios.post('/register', validated).then((res) => {
+                console.log(res);
+            }).catch((onrejected) => {
+                if (onrejected instanceof AxiosError) {
+                    addError({ ...onrejected.response?.data });
+                }
+            });
         } catch (error) {
-            console.error(error);
+            if (error instanceof Error) {
+                return addError({ message: error.message });
+            }
         }
     }
+
 
     return (
         <RegisterComponent

@@ -10,6 +10,8 @@
 </head>
 
 <body class="antialiased">
+    <noscript>You need to enable Javascript to run this Application</noscript>
+    <div id="modalRoot"></div>
     <div id="app"></div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
