@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import React from "react";
 
 export type T_Nullable<T> = T | null;

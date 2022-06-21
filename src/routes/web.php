@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{path?}', function () {
+Route::get('/', function () {
     return view('index');
-})->where('path', '.*');
+});
+Route::get('/login', function () {
+    return view('index');
+});
+Route::get('/register', function () {
+    return view('index');
+});
+Route::get('/about-us', function () {
+    return view('index');
+});
+
+Route::get('/user', function () {
+    return Auth::user();
+});
+

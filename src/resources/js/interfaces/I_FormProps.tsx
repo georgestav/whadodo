@@ -1,7 +1,10 @@
-export interface I_RegisterForm {
+export interface  I_LoginForm {
     email: string,
-    name: string,
     password: string,
+}
+
+export interface I_RegisterForm extends I_LoginForm{
+    name: string,
     password_confirmation: string,
     terms_accepted: boolean
 }

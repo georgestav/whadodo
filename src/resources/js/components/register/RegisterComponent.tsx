@@ -39,7 +39,7 @@ const RegisterComponent = (props: any) => {
                 </div>
             </Form.Group>
             <Button variant="primary" type="submit">
-                Submit
+                Register
             </Button>
         </Form>
     )
