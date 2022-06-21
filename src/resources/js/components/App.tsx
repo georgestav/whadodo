@@ -9,6 +9,7 @@ import AboutUs from "./aboutUs/AboutUs";
 import Header from "./header/Header";
 import Main from "./main/Main";
 import Register from "./register/Register";
+import Login from "./login/Login";
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
                         <Route path="/" element={<Main />} />
                         <Route path="/about-us" element={<AboutUs />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login />} />
                         {/* More front end routes here */}
                     </Routes>
                     <APIErrorNotification />

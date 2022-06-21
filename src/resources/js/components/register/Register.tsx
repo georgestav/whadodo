@@ -12,30 +12,30 @@ const Register = () => {
     const [emailInput, setEmailInput] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-    const [passworndConfirmInput, setPassworndConfirmInput] = useState('');
+    const [passwordConfirmInput, setPasswordConfirmInput] = useState('');
     const [terms, setTerms] = useState(false);
 
     const handleTerms = (status: boolean) => {
         setTerms(status);
     }
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: Event) => {
         e.preventDefault();
         const formData = {
             email: emailInput,
             name: nameInput,
             password: passwordInput,
-            password_confirmation: passworndConfirmInput,
+            password_confirmation: passwordConfirmInput,
             terms_accepted: terms
         }
         try {
             const validated = await FormTools.validateRegForm(formData)
-            axios.post('/register', validated).then((res) => {
+            axios.post('/register', validated).then(() => {
                 addSuccess({ message: 'Registered Successfully ' + formData.name + ', Welcome Onboard!' })
                 setEmailInput('');
                 setNameInput('');
                 setPasswordInput('');
-                setPassworndConfirmInput('');
+                setPasswordConfirmInput('');
                 setTerms(false);
             }).catch((onrejected) => {
                 if (onrejected instanceof AxiosError) {
@@ -59,8 +59,8 @@ const Register = () => {
             setNameInput={setNameInput}
             passwordInput={passwordInput}
             setPasswordInput={setPasswordInput}
-            passworndConfirmInput={passworndConfirmInput}
-            setPassworndConfirmInput={setPassworndConfirmInput}
+            passworndConfirmInput={passwordConfirmInput}
+            setPassworndConfirmInput={setPasswordConfirmInput}
             handleTerms={handleTerms} />
     );
 };
