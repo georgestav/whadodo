@@ -5,10 +5,12 @@ import useAPIError from "../../common/hooks/useAPIError";
 import useAPISuccess from "../../common/hooks/useAPISuccess";
 import { FormTools } from "../../utils/FormUtils";
 import RegisterComponent from "./RegisterComponent";
+import useAPIUserContext from "../../common/hooks/useAPIUserContext";
 
 const Register = () => {
     const { addError } = useAPIError();
     const { addSuccess } = useAPISuccess();
+    const { addOptions } = useAPIUserContext();
     const [emailInput, setEmailInput] = useState('');
     const [nameInput, setNameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
@@ -31,12 +33,15 @@ const Register = () => {
         try {
             const validated = await FormTools.validateRegForm(formData)
             axios.post('/register', validated).then(() => {
+                axios.post('/user').then((res)=>{
+                addOptions(res);
                 addSuccess({ message: 'Registered Successfully ' + formData.name + ', Welcome Onboard!' })
                 setEmailInput('');
                 setNameInput('');
                 setPasswordInput('');
                 setPasswordConfirmInput('');
                 setTerms(false);
+                })
             }).catch((onrejected) => {
                 if (onrejected instanceof AxiosError) {
                     addError({ ...onrejected.response?.data });

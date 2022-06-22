@@ -1,9 +1,9 @@
 // @ts-nocheck
 import React, { useCallback, useState } from 'react'
-import { I_AuxProps } from '../../interfaces/I_AuxProps';
+import {I_AuxProps, I_ErrorContext} from '../../interfaces/I_AuxProps';
 
-export const APIErrorContext = React.createContext({
-    error: null,
+export const APIErrorContext = React.createContext<I_ErrorContext>({
+    error: undefined,
     addError: (message: {}) => { },
     removeError: () => { }
 });

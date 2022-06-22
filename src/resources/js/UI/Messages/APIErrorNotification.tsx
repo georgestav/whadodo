@@ -17,7 +17,7 @@ const ModalOverlay = ({ error, handleClose }: ModalProps) => {
             </Modal.Header>
 
             <Modal.Body>
-                {error?.message && <p>{error?.message.message}</p>}
+                {error?.message && <p>{error?.message?.message}</p>}
             </Modal.Body>
 
             <Modal.Footer>
@@ -38,6 +38,7 @@ function APIErrorNotification() {
 
     return (
         <React.Fragment>
+        {/*// @ts-ignore*/}
             {ReactDOM.createPortal(<ModalOverlay handleClose={handleClose} error={error} />, document.getElementById('modalRoot')!)}
         </ React.Fragment>
     )

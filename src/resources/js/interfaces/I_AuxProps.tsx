@@ -1,4 +1,5 @@
 import React from "react";
+import {I_UserOptions} from "./I_UserContext";
 
 export type T_Nullable<T> = T | null;
 
@@ -14,10 +15,21 @@ export interface I_ErrorMessage {
     },
     status?: string | undefined
 }
+export interface I_ErrorContext {
+    error?: I_ErrorMessage,
+    addError: (content: any) => void,
+    removeError: () => void
+}
 
 export interface I_SuccessMessage {
     message?: {
         message?: string;
     },
     status?: string | undefined
+}
+
+export interface I_SuccessContext {
+    success?: I_SuccessMessage,
+    addSuccess: (content: any) => void,
+    removeSuccess: () => void
 }

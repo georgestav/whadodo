@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React, { useCallback, useState } from 'react'
-import { I_AuxProps } from '../../interfaces/I_AuxProps';
+import {I_AuxProps, I_SuccessContext} from '../../interfaces/I_AuxProps';
 
-export const APISuccessContext = React.createContext({
+export const APISuccessContext = React.createContext<I_SuccessContext>({
     success: null,
     addSuccess: (message: {}) => { },
     removeSuccess: () => { }

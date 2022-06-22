@@ -38,6 +38,7 @@ function APISuccessNotification() {
 
     return (
         <React.Fragment>
+            {/*// @ts-ignore*/}
             {ReactDOM.createPortal(<ModalOverlay handleClose={handleClose} success={success} />, document.getElementById('modalRoot')!)}
         </ React.Fragment>
     )

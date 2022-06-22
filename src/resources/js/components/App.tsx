@@ -10,24 +10,29 @@ import Header from "./header/Header";
 import Main from "./main/Main";
 import Register from "./register/Register";
 import Login from "./login/Login";
+import APIUserProvider from "../providers/APIUserProvider";
+import Profile from "./profile/Profile";
 
 const App = () => {
     return (
         <BrowserRouter>
-            <Header />
-            <APIErrorProvider>
-                <APISuccessProvider>
-                    <Routes>
-                        <Route path="/" element={<Main />} />
-                        <Route path="/about-us" element={<AboutUs />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/login" element={<Login />} />
-                        {/* More front end routes here */}
-                    </Routes>
-                    <APIErrorNotification />
-                    <APISuccessNotification />
-                </APISuccessProvider>
-            </APIErrorProvider>
+            <APIUserProvider>
+                <APIErrorProvider>
+                    <APISuccessProvider>
+                        <Header />
+                        <Routes>
+                            <Route path="/" element={<Main />} />
+                            <Route path="/about-us" element={<AboutUs />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/profile" element={<Profile />} />
+                            {/* More front end routes here */}
+                        </Routes>
+                        <APIErrorNotification />
+                        <APISuccessNotification />
+                    </APISuccessProvider>
+                </APIErrorProvider>
+            </APIUserProvider>
         </BrowserRouter>
 
     );

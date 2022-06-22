@@ -27,7 +27,14 @@ Route::get('/about-us', function () {
     return view('index');
 });
 
-Route::get('/user', function () {
+Route::get('/profile', function () {
+    return view('index');
+})->middleware('auth');
+
+Route::post('/user', function () {
+    // TODO protect this
     return Auth::user();
-});
+})->middleware('auth');
+
+
 
